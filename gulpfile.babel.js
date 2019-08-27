@@ -22,7 +22,10 @@ gulp.task('build:lib:babel', () => gulp
 
 gulp.task('build:lib:umd', () => gulp
   .src(['src/index.js'])
-  .pipe(webpackStream(webpackConfig, webpack))
+  .on('error', function(err) { 
+    console.log(err); 
+  })
+  // .pipe(webpackStream(webpackConfig, webpack))
   .pipe(gulp.dest('dist')));
 
 gulp.task('build:lib:style', () => gulp
@@ -47,6 +50,8 @@ gulp.task('build:lib', (callback) => {
     'build:lib:copy',
     callback
   );
+
+
 });
 
 gulp.task('build:example:clean', () => {
@@ -72,7 +77,8 @@ gulp.task('build:example', (callback) => {
 });
 
 gulp.task('build', (callback) => {
-  runSequence('build:lib', 'build:example', callback);
+      // webpackStream(webpackConfig, webpack);
+  runSequence('build:lib', callback);
 });
 
 gulp.task('default', ['build']);

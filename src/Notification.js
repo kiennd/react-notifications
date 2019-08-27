@@ -56,11 +56,12 @@ class Notification extends React.Component {
     let { title } = this.props;
     const className = classnames(['notification', `notification-${type}`]);
     title = title ? (<h4 className="title">{title}</h4>) : null;
+    // console.log(message);
     return (
       <div className={className} onClick={this.handleClick}>
         <div className="notification-message" role="alert">
           {title}
-          <div className="message">{message}</div>
+          <div className="message"> <span dangerouslySetInnerHTML={{ __html: message }}/></div>
         </div>
       </div>
     );
